@@ -37,7 +37,13 @@ class DB_Manager:
                             status_name TEXT 
                         )''')
             conn.commit()
-
+            cursor = conn.cursor()
+            cursor.execute("PRAGMA table_info(projects)")
+            columns = [col[1] for col in cursor.fetchall()]
+            if 'deadline' not in columns:
+                alter_query = "ALTER TABLE projects ADD COLUMN deadline TEXT"
+                cursor.execute(alter_query)
+                conn.commit() 
     def __executemany(self, sql, data):
         conn = sqlite3.connect(self.database)
         with conn:
@@ -126,7 +132,26 @@ WHERE user_id = ? AND project_id = ? """
 WHERE skill_id = ? AND project_id = ? """
         self.__executemany(sql, [(skill_id, project_id)])
 
+    def delete_status(self, status_id):
+        sql = "DELETE FROM status WHERE status_id = ?"
+        self.__executemany(sql, [(status_id,)])
 
+    def add_skill(self, skill_name):
+        sql = "INSERT OR IGNORE INTO skills (skill_name) VALUES (?)"
+        self.__executemany(sql, [(skill_name,)])
+
+    def update_skill(self, skill_id, new_name):
+        sql = "UPDATE skills SET skill_name = ? WHERE skill_id = ?"
+        self.__executemany(sql, [(new_name, skill_id)])
+
+    def update_project_status(self, project_id, new_status_id):
+        sql = "UPDATE projects SET status_id = ? WHERE project_id = ?"
+        self.__executemany(sql, [(new_status_id, project_id)])
+
+    def delete_skill_by_id(self, skill_id):
+        sql = "DELETE FROM skills WHERE skill_id = ?"
+        self.__executemany(sql, [(skill_id,)])
+    
 if __name__ == '__main__':
     manager = DB_Manager(DATABASE)
     manager.create_tables()
