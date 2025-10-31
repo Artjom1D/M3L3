@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="240" viewBox="0 0 600 240">
+  <rect width="100%" height="100%" fill="#0f172a"/>
+  <g fill="#38bdf8" font-family="sans-serif">
+    <rect x="40" y="30" width="160" height="60" rx="8" fill="#0ea5e9"/>
+    <text x="120" y="65" font-size="14" fill="#021124" text-anchor="middle">projects</text>
+    <rect x="220" y="30" width="160" height="60" rx="8" fill="#06b6d4"/>
+    <text x="300" y="65" font-size="14" fill="#021124" text-anchor="middle">skills</text>
+    <rect x="400" y="30" width="160" height="60" rx="8" fill="#0891b2"/>
+    <text x="480" y="65" font-size="14" fill="#021124" text-anchor="middle">status</text>
+
+    <line x1="200" y1="60" x2="220" y2="60" stroke="#67e8f9" stroke-width="3"/>
+    <path d="M200 60 Q 260 120 320 60" fill="none" stroke="#67e8f9" stroke-width="2"/>
+
+    <rect x="120" y="130" width="360" height="70" rx="8" fill="#22c55e"/>
+    <text x="300" y="170" font-size="14" fill="#04260f" text-anchor="middle">project_skills (association)</text>
+  </g>
+</svg>
